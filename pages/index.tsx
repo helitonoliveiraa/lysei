@@ -1,6 +1,3 @@
-
 export default function Home(): JSX.Element {
-  return (
-    <h1>Lysei</h1>
-  )
+  return <h1>Lysei</h1>;
 }
