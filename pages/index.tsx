@@ -1,3 +1,5 @@
+import { Text } from '@chakra-ui/react';
+
 export default function Home(): JSX.Element {
-  return <h1>Lysei</h1>;
+  return <Text>Lysei</Text>;
 }
