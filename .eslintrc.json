@@ -35,13 +35,17 @@
         ]
       }
     ],
+    "arrow-parens":"off",
     "no-undef": "off",
+    "no-nested-ternary": "off",
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": [
       "error"
     ],
     "object-curly-newline": "off",
+    "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
+    "react/require-default-props": "off",
     "react/jsx-props-no-spreading": "off",
     "import/prefer-default-export": "off",
     "import/extensions": [
