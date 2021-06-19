@@ -1,5 +1,5 @@
-import { Text } from '@chakra-ui/react';
+import { Header } from '../components/Header';
 
 export default function Home(): JSX.Element {
-  return <Text color="pink.500">Lysei singin</Text>;
+  return <Header />;
 }
