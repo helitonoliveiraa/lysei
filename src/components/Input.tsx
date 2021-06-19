@@ -12,6 +12,7 @@ import {
   InputProps as ChakraInputProps,
   FormErrorMessage,
   FormControl,
+  FormLabel,
 } from '@chakra-ui/react';
 import { FieldError } from 'react-hook-form';
 
@@ -26,7 +27,6 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   ref: ForwardedRef<HTMLInputElement>,
 ): JSX.Element => {
   const [isFocused, setIsFocused] = useState(false);
-
   function handleInputFocus() {
     setIsFocused(true);
   }
@@ -38,32 +38,38 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   return (
     <FormControl isInvalid={!!error}>
       <Flex width="100%">
-        <Flex
+        <FormLabel
+          htmlFor={name}
           w="50px"
           h="50px"
+          mr="0"
           border={isFocused || !!error ? '2px solid' : '1px solid'}
           borderRight="none"
           borderLeftRadius="8px"
           borderColor={
             isFocused ? 'purple.600' : error ? 'red.400' : 'gray.200'
           }
-          align="center"
-          justify="center"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
         >
           <Icon
             as={icon}
             fontSize="24"
             color={isFocused ? 'purple.600' : error ? 'red.400' : 'gray.200'}
+            display="block"
           />
-        </Flex>
+        </FormLabel>
         <ChakraInput
           ref={ref}
+          id={name}
           name={name}
           flex="1"
           h="50px"
           borderLeftRadius="none"
           borderRightRadius="8px"
           focusBorderColor="purple.600"
+          color="gray.400"
           _placeholder={{
             fontSize: 'md',
             color: 'gray.300',
