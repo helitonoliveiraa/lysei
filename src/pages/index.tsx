@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Text, Flex, Image, VStack } from '@chakra-ui/react';
+import { Text, Flex, Image, VStack, useToast } from '@chakra-ui/react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { FiMail, FiLock } from 'react-icons/fi';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -7,6 +7,7 @@ import * as yup from 'yup';
 
 import { Input } from '../components/Input';
 import { Button } from '../components/Button';
+import { useAuth } from '../contexts/AuthContext';
 
 type SignInFormData = {
   email: string;
@@ -26,8 +27,21 @@ export default function Home(): JSX.Element {
     resolver: yupResolver(createUserFormSchema),
   });
 
+  const { signIn } = useAuth();
+  const toast = useToast();
+
   const handleSignIn: SubmitHandler<SignInFormData> = async data => {
-    console.log(data);
+    try {
+      await signIn(data);
+    } catch (err) {
+      toast({
+        status: 'error',
+        title: 'Falha!',
+        description: 'Ocorreu uma falha ao realizar login, tente novamente!',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
 
   return (
@@ -117,7 +131,13 @@ export default function Home(): JSX.Element {
       <Flex flex="1" flexDirection="column" align="center" justify="center">
         <Image src="/logo.svg" alt="Logo" maxWidth={316} />
 
-        <Image src="/banner.png" alt="Banner" maxWidth={690} mt="40" />
+        <Image
+          src="/banner.png"
+          alt="Banner"
+          maxWidth="690"
+          mt="40"
+          objectFit="cover"
+        />
 
         <Text
           mt="12"
