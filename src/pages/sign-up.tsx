@@ -1,5 +1,13 @@
-import { Flex, Text, Image, VStack } from '@chakra-ui/react';
-import { FiUser, FiBriefcase, FiMapPin, FiMail, FiLock } from 'react-icons/fi';
+import Link from 'next/link';
+import { Flex, Text, Image, VStack, Box, Icon } from '@chakra-ui/react';
+import {
+  FiUser,
+  FiBriefcase,
+  FiMapPin,
+  FiMail,
+  FiLock,
+  FiArrowLeft,
+} from 'react-icons/fi';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -37,7 +45,7 @@ export default function SignUp(): JSX.Element {
 
   return (
     <Flex align="center" justify="center" w="100vw" h="100vh">
-      <Flex paddingX="40" paddingY="16" borderRadius="16" boxShadow="lg">
+      <Box paddingX="40" paddingY="16" borderRadius="16" boxShadow="lg">
         <Flex
           as="form"
           width="100%"
@@ -107,11 +115,29 @@ export default function SignUp(): JSX.Element {
             />
           </VStack>
 
-          <Button type="submit" mt="44" isLoading={formState.isSubmitting}>
+          <Button type="submit" mt="36" isLoading={formState.isSubmitting}>
             CADASTRAR
           </Button>
         </Flex>
-      </Flex>
+
+        <Link href="/">
+          <a>
+            <Text
+              textAlign="center"
+              fontSize="xl"
+              fontWeight="black"
+              color="purple.500"
+              mt="8"
+              _hover={{
+                color: 'purple.700',
+              }}
+            >
+              <Icon as={FiArrowLeft} fontSize="24" mr="2" />
+              Voltar para login
+            </Text>
+          </a>
+        </Link>
+      </Box>
     </Flex>
   );
 }
