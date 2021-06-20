@@ -17,7 +17,7 @@ export function Header(): JSX.Element {
             <CustomLink href="/profile" icon={FiUser} />
           </HStack>
 
-          <Link href="/login">
+          <Link href="/">
             <a>
               <Icon
                 as={FiLogOut}
