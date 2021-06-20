@@ -11,10 +11,12 @@ import { FiMapPin, FiThumbsUp, FiEdit } from 'react-icons/fi';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 import { Header } from '../../../components/Header';
+import { useModal } from '../../../contexts/ModalContext';
 
 // import mapMarkerImg from '../../../assets/map-marker.svg';
 
 export default function OccurenceView(): JSX.Element {
+  const { handleEditModal } = useModal();
   return (
     <>
       <Header />
@@ -56,6 +58,7 @@ export default function OccurenceView(): JSX.Element {
                   bgColor="transparent"
                   _hover={{ bgColor: 'purple.100' }}
                   w="2"
+                  onClick={() => handleEditModal()}
                 >
                   <Icon as={FiEdit} fontSize="2xl" color="purple.600" />
                 </Button>
