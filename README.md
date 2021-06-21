@@ -1,5 +1,5 @@
 <h1 align="center">
-  Healthy Food
+  <img alt="Logo" src="https://res.cloudinary.com/dzn5ixmhq/image/upload/v1624243021/lysei/LyseiApp_ukjetw.png">
 </h1>
 
 <p align="center">
@@ -32,12 +32,6 @@
   <img src="https://res.cloudinary.com/dzn5ixmhq/image/upload/v1624240958/lysei/image_3_tox5c8.png" alt="Lysei">
 </p>
 
-<p align="center">
-  Clique aqui⤵️<br />
-  <a href="https://quizzical-keller-6a1d53.netlify.app/">
-    <img src="https://res.cloudinary.com/dzn5ixmhq/image/upload/v1612276477/button-netlify_gg2ey0.png" width="200" >
-  </a>
-</p>
 
 # :memo: Sobre
 
