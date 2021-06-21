@@ -1,5 +1,14 @@
 import Link from 'next/link';
-import { Flex, Text, Image, VStack, Box, Icon } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import {
+  Flex,
+  Text,
+  Image,
+  VStack,
+  Box,
+  Icon,
+  useToast,
+} from '@chakra-ui/react';
 import {
   FiUser,
   FiBriefcase,
@@ -7,26 +16,33 @@ import {
   FiMail,
   FiLock,
   FiArrowLeft,
+  FiHash,
 } from 'react-icons/fi';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+
+import { api } from '../services/api';
 
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 
 type CreateUserData = {
   name: string;
-  office: string;
+  occupation: string;
+  cpf: string;
   city: string;
+  state: string;
   email: string;
   password: string;
 };
 
 const createUserFormSchema = yup.object().shape({
   name: yup.string().required('Nome obrigatório'),
-  office: yup.string().required('Cargo obrigatório'),
+  occupation: yup.string().required('Cargo obrigatório'),
+  cpf: yup.string().required('CPF obrigatório'),
   city: yup.string().required('Cidade obrigatória'),
+  state: yup.string().required('Estado obrigatória'),
   email: yup.string().email('E-mail inválido').required('E-mail obrigatório'),
   password: yup
     .string()
@@ -39,8 +55,35 @@ export default function SignUp(): JSX.Element {
     resolver: yupResolver(createUserFormSchema),
   });
 
+  const navigation = useRouter();
+  const toast = useToast();
+
   const handleSignUp: SubmitHandler<CreateUserData> = async data => {
-    console.log(data);
+    try {
+      await api.post('users', {
+        ...data,
+        isPolitician: 'true',
+      });
+
+      toast({
+        status: 'success',
+        title: 'Successo!',
+        description: 'Cadastro realizado com sucesso!',
+        duration: 3000,
+        isClosable: true,
+      });
+
+      navigation.back();
+    } catch (err) {
+      toast({
+        status: 'error',
+        title: 'Falha!',
+        description:
+          'Ocorreu uma falha ao realizar o seu cadastro, tente novamente!',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
 
   return (
@@ -78,11 +121,20 @@ export default function SignUp(): JSX.Element {
 
             <Input
               icon={FiBriefcase}
-              name="office"
+              name="occupation"
               placeholder="Cargo"
-              error={formState.errors.office}
-              onChange={register('office').onChange}
-              ref={register('office').ref}
+              error={formState.errors.occupation}
+              onChange={register('occupation').onChange}
+              ref={register('occupation').ref}
+            />
+
+            <Input
+              icon={FiHash}
+              name="cpf"
+              placeholder="CPF"
+              error={formState.errors.cpf}
+              onChange={register('cpf').onChange}
+              ref={register('cpf').ref}
             />
 
             <Input
@@ -92,6 +144,15 @@ export default function SignUp(): JSX.Element {
               error={formState.errors.city}
               onChange={register('city').onChange}
               ref={register('city').ref}
+            />
+
+            <Input
+              icon={FiMapPin}
+              name="state"
+              placeholder="Estado"
+              error={formState.errors.state}
+              onChange={register('state').onChange}
+              ref={register('state').ref}
             />
 
             <Input
@@ -115,7 +176,7 @@ export default function SignUp(): JSX.Element {
             />
           </VStack>
 
-          <Button type="submit" mt="36" isLoading={formState.isSubmitting}>
+          <Button type="submit" mt="12" isLoading={formState.isSubmitting}>
             CADASTRAR
           </Button>
         </Flex>

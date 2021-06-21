@@ -35,9 +35,12 @@
         ]
       }
     ],
-    "operator-linebreak": "off",
+    "camelcase": "off",
     "arrow-parens":"off",
+    "implicit-arrow-linebreak": "off",
+    "operator-linebreak": "off",
     "no-undef": "off",
+    "no-unused-vars": "off",
     "no-nested-ternary": "off",
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": [
@@ -50,6 +53,7 @@
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
     "react/require-default-props": "off",
+    "react/jsx-curly-newline": "off",
     "react/jsx-props-no-spreading": "off",
     "import/prefer-default-export": "off",
     "import/extensions": [

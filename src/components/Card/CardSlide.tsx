@@ -1,5 +1,6 @@
-import { Flex, Text } from '@chakra-ui/react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { Flex, Text, Button } from '@chakra-ui/react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, {
   Pagination,
@@ -11,11 +12,27 @@ import SwiperCore, {
 
 SwiperCore.use([Pagination, Navigation, Mousewheel, Keyboard, Autoplay]);
 
+type Post = {
+  id: string;
+  author_id: string;
+  city: string;
+  description: string;
+  district: string;
+  likes: number;
+  latitude: number;
+  longitude: number;
+  number: number;
+  solved: boolean;
+  state: string;
+  street: string;
+  title: string;
+};
 type SlideProps = {
   imageURL: string[];
+  post: Post;
 };
 
-export function CardSlide({ imageURL }: SlideProps): JSX.Element {
+export function CardSlide({ imageURL, post }: SlideProps): JSX.Element {
   return (
     <Swiper
       slidesPerView={1}
@@ -44,13 +61,22 @@ export function CardSlide({ imageURL }: SlideProps): JSX.Element {
             justify="center"
             direction="column"
           >
-            <Link href="/home/occurrence_view">
-              <a>
-                <Text fontSize="sm" fontWeight="bold" color="gray.50">
-                  Visualizar detalhes
-                </Text>
-              </a>
-            </Link>
+            <Button
+              type="button"
+              border="none"
+              bgColor="transparent"
+              _hover={{
+                bgColor: 'transparent',
+              }}
+            >
+              <Link href="/home/occurrence_view">
+                <a>
+                  <Text fontSize="sm" fontWeight="bold" color="gray.50">
+                    Visualizar detalhes
+                  </Text>
+                </a>
+              </Link>
+            </Button>
           </Flex>
         </SwiperSlide>
       ))}

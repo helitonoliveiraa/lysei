@@ -9,7 +9,27 @@ const images = [
   'https://images.unsplash.com/photo-1546636889-ba9fdd63583e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8c3RyZWV0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
 ];
 
-export function Card(): JSX.Element {
+type Post = {
+  id: string;
+  author_id: string;
+  city: string;
+  description: string;
+  district: string;
+  likes: number;
+  latitude: number;
+  longitude: number;
+  number: number;
+  solved: boolean;
+  state: string;
+  street: string;
+  title: string;
+};
+
+type CardProps = {
+  post: Post;
+};
+
+export function Card({ post }: CardProps): JSX.Element {
   return (
     <Box maxWidth={420} w="100%" p="9" boxShadow="lg" borderRadius={20}>
       <Flex align="center">
@@ -26,17 +46,17 @@ export function Card(): JSX.Element {
             Héliton Oliveira
           </Text>
           <Text fontSize="md" color="gray.400">
-            São José do Rio Pardo - SP
+            {`${post.street}, ${post.city} - ${post.state}`}
           </Text>
         </Box>
       </Flex>
 
       <Box mt="5">
         <Text fontSize="2xl" fontWeight="black" color="gray.900" mb="5">
-          Buraco
+          {post.title}
         </Text>
 
-        <CardSlide imageURL={images} />
+        <CardSlide imageURL={images} post={post} />
       </Box>
 
       <Flex align="center" justify="space-between" mt={8}>
@@ -49,19 +69,19 @@ export function Card(): JSX.Element {
             <Icon as={FiThumbsUp} fontSize="2xl" color="orange.400" />
           </Button>
           <Text fontSize="xl" color="orange.400" fontWeight="black" ml="3">
-            356
+            {post.likes}
           </Text>
         </Flex>
 
         <Flex
           border="1px solid"
-          borderColor="pink.500"
+          borderColor={post.solved ? 'teal.400' : 'pink.500'}
           bgColor="pink.200"
           borderRadius={30}
           paddingX={4}
         >
-          <Text fontSize="sm" color="pink.500">
-            Pendente
+          <Text fontSize="sm" color={post.solved ? 'teal.400' : 'pink.500'}>
+            {post.solved ? 'Concluído' : 'Pendente'}
           </Text>
         </Flex>
       </Flex>
